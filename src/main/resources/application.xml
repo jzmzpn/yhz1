@@ -45,9 +45,5 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 		</tx:attributes>
 	</tx:advice>
 	<!-- 参与事务的service -->
-	<aop:config>
-		<aop:pointcut expression="execution(* com.yhz.com.service.*.*(..))"
-			id="servicePointCut" />
-		<aop:advisor advice-ref="taansactionAdvice" pointcut-ref="servicePointCut" />
-	</aop:config>
+	
 </beans> 

@@ -1,12 +1,17 @@
 package com.yhz.com.model;
 
-import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 public class KAdmin {
     private Integer id;
 
+    @Size(min = 4,max = 20,message="{username.size}")
+    @Pattern(regexp="[_a-zA-Z0-9]+",message="{username.pattern}")
     private String userName;
 
+    @NotNull
     private String password;
 
     private String salt;
