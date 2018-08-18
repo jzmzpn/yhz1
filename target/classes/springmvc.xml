@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd">
+
+	<!-- 配置spring注解扫描的包 -->
+	<context:component-scan base-package="com.yhz.com"></context:component-scan>
+
+	<!-- 开启注解驱动 -->
+	<!-- 会自动注册DefaultAnnotationHandlerMapping 与AnnotationMethodHandlerAdapter 
+		这两个bean, 所以就没有机会再给DefaultAnnotationHandlerMapping注入interceptors属性，无法指定拦截器。 
+		可以通过人工配置上面的两个Bean，不使用 <mvc:annotation-driven />，就可以 给interceptors属性 注入拦截器了 -->
+	<mvc:annotation-driven>
+		<mvc:message-converters>
+			<bean id="fastJsonHttpMessageConverter"
+				class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
+				<property name="supportedMediaTypes">
+					<list>
+						<value>application/json;charset=UTF-8</value>
+					</list>
+				</property>
+			</bean>
+		</mvc:message-converters>
+
+	</mvc:annotation-driven>
+
+
+
+
+	<!-- 静态资源访问，解决页面无法访问到js、img和css文件夹中的文件的问题 -->
+	<mvc:resources location="/js/" mapping="/js/**" />
+	<mvc:resources location="/css/" mapping="/css/**" />
+	<mvc:resources location="/jsp/assets/css/" mapping="/assets/css/**" />
+	<mvc:resources location="/jsp/assets/fonts/" mapping="/assets/fonts/**" />
+	<mvc:resources location="/jsp/assets/js/" mapping="/assets/js/**" />
+	<mvc:resources location="/jsp/assets/scss/" mapping="/assets/scss/**" />
+	<mvc:resources location="/jsp/images/" mapping="/images/**" />
+
+	<!-- 视图解析器：InternalResourceViewResolver UrlBasedViewResolver 的子类，通常用于查找 
+		JSP（类 InternalResourceView）和 JSTL（类 JstlView，InternalResourceView 的子类）等视图 -->
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.JstlView"></property>
+		<property name="prefix" value="/WEB-INF/jsp"></property>
+		<property name="suffix" value=".jsp"></property>
+	</bean>
+
+	<!-- 文件上传限制 -->
+	<!-- <bean
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="defaultEncoding" value="UTF-8"></property>
+		<property name="maxUploadSize" value="5242880"></property>
+		<property name="maxInMemorySize" value="20480"></property>
+	</bean> -->
+	
+	<bean id="multipartResolver"  
+        class="org.springframework.web.multipart.commons.CommonsMultipartResolver">  
+        <!-- 上传文件大小上限，单位为字节（10MB） -->
+        <property name="maxUploadSize">  
+            <value>10485760</value>  
+        </property>  
+        <!-- 请求的编码格式，必须和jSP的pageEncoding属性一致，以便正确读取表单的内容，默认为ISO-8859-1 -->
+        <property name="defaultEncoding">
+            <value>UTF-8</value>
+        </property>
+    </bean>
+    
+    <!--配置拦截器, 多个拦截器,顺序执行 -->  
+	<mvc:interceptors>
+	    <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor"/>
+	    <mvc:interceptor>
+	        <!-- 匹配的是url路径， 如果不配置或/**,将拦截所有的Controller -->    
+	        <mvc:mapping path="/**"/>
+	        <mvc:exclude-mapping path="/assets/**"/>
+	        <mvc:exclude-mapping path="/images/**"/>
+	        <mvc:exclude-mapping path="/login"/>
+	        <bean class="com.yhz.com.interceptor.SessionInterceptor"></bean>
+	    </mvc:interceptor>
+	</mvc:interceptors>
+    
+</beans> 
