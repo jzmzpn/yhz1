@@ -85,6 +85,22 @@
 						            <button id="btn_delete" type="button" style="margin-right:5px"  class="btn btn-primary">
 						                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
 						            </button>
+						            <button id="btn_delete" type="button" style="margin-right:5px"  class="btn btn-primary" onclick="javascript:importStudents();">
+						                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>導入
+						            </button>
+						            
+						            <form id="infoLogoForm" enctype='multipart/form-data' style="display:none;">
+								    <div class="cnt-updateWrapper" >
+								        <div>
+								            <div id="loadImg" class="cnt-img-content">
+								                <div id="licenseBox" class="ctn-licence">
+								                    <input type="file" id="ctn-input-file" name="imageFile" style="height:40px" >
+								                	<input type="hidden" name="imageId" id="imageId"/>
+								                </div>
+								            </div>
+								        </div>
+								    </div>
+								</form>
 						        </div>
 								<table id="table">
 
@@ -135,6 +151,38 @@
 
 
 	<script type="text/javascript">
+	
+	function importStudents() {
+		$("#ctn-input-file").trigger("click");
+	}
+	
+	var uploading = false;
+	
+	$("#ctn-input-file").on("change", function(){
+	    if(uploading){
+	        alert("文件正在上传中，请稍候");
+	        return false;
+	    }
+	    $.ajax({
+	        url: "${pageContext.request.contextPath}/xls/upload/stu",
+	        type: 'POST',
+	        cache: false,
+	        data: new FormData($('#infoLogoForm')[0]),
+	        processData: false,
+	        contentType: false,
+	        dataType:"json",
+	        beforeSend: function(){
+	            uploading = true;
+	        },
+	        success : function(data) {
+	        	//location.reload()；
+	        	window.location.reload()
+	            uploading = false;
+	        }
+	    });
+	});
+	
+	
     var $table;
     //初始化bootstrap-table的内容
     function InitMainTable () {
@@ -187,16 +235,25 @@
                 title: 'ID',
                 sortable: true
             }, {
-                field: 'kindergartenId',
-                title: '幼兒園ID',
+                field: 'name',
+                title: '姓名',
                 sortable: true
             }, {
-                field: 'news',
-                title: '资讯信息',
+                field: 'sex',
+                title: '性別',
+                formatter: function (value, row, index) {
+                    if(value == 'F') {
+                    	return '女';
+                    }
+                    if(value == 'M') {
+                    	return '男';
+                    }
+                    return "未知";
+                }
             },
             {
-                field: 'birthday',
-                title: '生日'
+                field: 'enterDate',
+                title: '入学时间'
             },
             {
                 field: 'createDate',

@@ -69,7 +69,7 @@
 			</a>
 				<ul class="sub-menu children dropdown-menu">
 					<li><i class="menu-icon fa fa-th"></i><a
-						href="forms-basic.html">Basic Form</a></li>
+						href="${ctx}/student/student-list">學生列表</a></li>
 					<li><i class="menu-icon fa fa-th"></i><a
 						href="forms-advanced.html">Advanced Form</a></li>
 				</ul></li>
