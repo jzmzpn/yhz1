@@ -10,6 +10,7 @@ import java.lang.reflect.Method;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -27,9 +28,18 @@ import com.yhz.com.model.Student;
 public class ExcelUtils {
     private static final String FULL_DATA_FORMAT = "yyyy/MM/dd  HH:mm:ss";
     private static final String SHORT_DATA_FORMAT = "yyyy/MM/dd";
- 
- 
-    /**
+    private static HashMap<String, Integer> nameTOIdMap = new HashMap<String, Integer>();
+    
+
+	public static HashMap<String, Integer> getNameTOIdMap() {
+		return nameTOIdMap;
+	}
+
+	public static void setNameTOIdMap(HashMap<String, Integer> nameTOIdMap) {
+		ExcelUtils.nameTOIdMap = nameTOIdMap;
+	}
+
+	/**
      * Excel表头对应Entity属性 解析封装javabean
      *
      * @param classzz    类
@@ -166,7 +176,19 @@ public class ExcelUtils {
                                     volidateValueRequired(eHead,sheetName,rowIndex);
                                     break;
                                 }
-                                method.invoke(instance, convertType(field.getType(), value.trim()));
+                                //name转ID
+                                if("classId".equalsIgnoreCase(field.getName()) || "teacherId".equalsIgnoreCase(field.getName()) || "position".equalsIgnoreCase(field.getName())){
+                                	if(nameTOIdMap.get(value.trim())==null){
+                                		//教师信息不存在或者职位信息不存在
+                                		volidateValueRequired(eHead,sheetName,rowIndex);
+                                        break;
+                                	}
+                                	method.invoke(instance, convertType(field.getType(), nameTOIdMap.get(value.trim())+""));
+                                }else{
+                                	method.invoke(instance, convertType(field.getType(), value.trim()));
+                                }
+                                	
+                                
                             }
                             break;
                         }
@@ -323,11 +345,9 @@ public class ExcelUtils {
 				System.out.println(student.getAddress());
 				System.out.println(list.size());
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
     }

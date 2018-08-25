@@ -25,7 +25,11 @@ public class ClassController {
 	
 	@Resource
 	private StudentMapper studentMapper;
-
+	
+	@RequestMapping("class-list")
+	public String articles() {
+		return "/class/class-list";
+	}
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	@ResponseBody
@@ -49,5 +53,4 @@ public class ClassController {
 		map.put("classInfo", info);
 		return map;
 	}
-	
 }
