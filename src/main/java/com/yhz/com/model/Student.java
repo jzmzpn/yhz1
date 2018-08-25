@@ -2,10 +2,14 @@ package com.yhz.com.model;
 
 import java.util.Date;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 public class Student {
     private Integer id;
 
     private String name;
+
+    private String littleName;
 
     private String sid;
 
@@ -19,17 +23,21 @@ public class Student {
 
     private String address;
 
+    @JSONField(format = "yyyy-MM-dd hh:mm:ss")
     private Date enterDate;
 
+    @JSONField(format = "yyyy-MM-dd hh:mm:ss")
     private Date outDate;
 
     private Integer guardianNum;
 
     private String remark;
-
+    @JSONField(format = "yyyy-MM-dd hh:mm:ss")
     private Date createDate;
-
+    @JSONField(format = "yyyy-MM-dd hh:mm:ss")
     private Date updateDate;
+
+    private Boolean isDelete;
 
     public Integer getId() {
         return id;
@@ -45,6 +53,14 @@ public class Student {
 
     public void setName(String name) {
         this.name = name == null ? null : name.trim();
+    }
+
+    public String getLittleName() {
+        return littleName;
+    }
+
+    public void setLittleName(String littleName) {
+        this.littleName = littleName == null ? null : littleName.trim();
     }
 
     public String getSid() {
@@ -141,5 +157,13 @@ public class Student {
 
     public void setUpdateDate(Date updateDate) {
         this.updateDate = updateDate;
+    }
+
+    public Boolean getIsDelete() {
+        return isDelete;
+    }
+
+    public void setIsDelete(Boolean isDelete) {
+        this.isDelete = isDelete;
     }
 }

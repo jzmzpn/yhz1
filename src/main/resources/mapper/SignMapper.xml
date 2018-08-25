@@ -1,40 +1,50 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.yhz.com.dao.ImageInfoMapper" >
-  <resultMap id="BaseResultMap" type="com.yhz.com.model.ImageInfo" >
+<mapper namespace="com.yhz.com.dao.SignMapper" >
+  <resultMap id="BaseResultMap" type="com.yhz.com.model.Sign" >
     <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="image_path" property="imagePath" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="sign_place" property="signPlace" jdbcType="VARCHAR" />
+    <result column="sign_time" property="signTime" jdbcType="TIMESTAMP" />
     <result column="remark" property="remark" jdbcType="VARCHAR" />
     <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
     <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, image_path, remark, create_date, update_date
+    id, user_id, sign_place, sign_time, remark, create_date, update_date
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    from image_info
+    from sign_info
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from image_info
+    delete from sign_info
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.yhz.com.model.ImageInfo" >
-    insert into image_info (id, image_path, remark, 
-      create_date, update_date)
-    values (#{id,jdbcType=INTEGER}, #{imagePath,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
-      #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP})
+  <insert id="insert" parameterType="com.yhz.com.model.Sign" >
+    insert into sign_info (id, user_id, sign_place, 
+      sign_time, remark, create_date, 
+      update_date)
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{signPlace,jdbcType=VARCHAR}, 
+      #{signTime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{updateDate,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.yhz.com.model.ImageInfo" useGeneratedKeys="true" keyProperty="id">
-    insert into image_info
+  <insert id="insertSelective" parameterType="com.yhz.com.model.Sign" >
+    insert into sign_info
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
       </if>
-      <if test="imagePath != null" >
-        image_path,
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="signPlace != null" >
+        sign_place,
+      </if>
+      <if test="signTime != null" >
+        sign_time,
       </if>
       <if test="remark != null" >
         remark,
@@ -50,8 +60,14 @@
       <if test="id != null" >
         #{id,jdbcType=INTEGER},
       </if>
-      <if test="imagePath != null" >
-        #{imagePath,jdbcType=VARCHAR},
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="signPlace != null" >
+        #{signPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="signTime != null" >
+        #{signTime,jdbcType=TIMESTAMP},
       </if>
       <if test="remark != null" >
         #{remark,jdbcType=VARCHAR},
@@ -64,11 +80,17 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.yhz.com.model.ImageInfo" >
-    update image_info
+  <update id="updateByPrimaryKeySelective" parameterType="com.yhz.com.model.Sign" >
+    update sign_info
     <set >
-      <if test="imagePath != null" >
-        image_path = #{imagePath,jdbcType=VARCHAR},
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="signPlace != null" >
+        sign_place = #{signPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="signTime != null" >
+        sign_time = #{signTime,jdbcType=TIMESTAMP},
       </if>
       <if test="remark != null" >
         remark = #{remark,jdbcType=VARCHAR},
@@ -82,9 +104,11 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.yhz.com.model.ImageInfo" >
-    update image_info
-    set image_path = #{imagePath,jdbcType=VARCHAR},
+  <update id="updateByPrimaryKey" parameterType="com.yhz.com.model.Sign" >
+    update sign_info
+    set user_id = #{userId,jdbcType=INTEGER},
+      sign_place = #{signPlace,jdbcType=VARCHAR},
+      sign_time = #{signTime,jdbcType=TIMESTAMP},
       remark = #{remark,jdbcType=VARCHAR},
       create_date = #{createDate,jdbcType=TIMESTAMP},
       update_date = #{updateDate,jdbcType=TIMESTAMP}

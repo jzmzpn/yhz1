@@ -119,5 +119,5 @@ public class UserInfoController {
 		map.put("userInfoMapper", info);
         return map;
     }
-    
+
 }

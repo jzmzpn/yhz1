@@ -179,4 +179,31 @@
 		
 		limit #{start},#{rows}
 	</select>
+	
+	<!-- 
+	
+	
+	messageType" jdbcType="INTEGER" />
+    <result column="message" property="message" jdbcType="VARCHAR" />
+    <result column="message_image" property="messageImage" jdbcType="INTEGER" />
+    <result column="send_time" property="sendTime" jdbcType="TIMESTAMP" />
+    <result column="is_read" property="isRead" jdbcType="BIT" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+	
+	
+	 -->
+	
+	<select id="getMessageBySelective" resultMap="BaseResultMap">
+		select * from message_info 
+		<where>
+			<if test="sendUid != null">
+				send_uid = #{sendUid}
+			</if>
+			<if test="messageType != null">
+				message_type = #{messageType}
+			</if>
+		</where>
+	</select>
 </mapper>

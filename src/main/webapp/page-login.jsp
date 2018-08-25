@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!doctype html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
@@ -43,42 +46,30 @@
 					</a>
 				</div>
 				<div class="login-form">
-					<form>
+					<form action="login" method="post">
 						<div class="form-group">
-							<label>Email address</label> <input type="email"
-								class="form-control" placeholder="Email">
+							<label>用户名</label> <input type="userName" name="userName"
+								class="form-control" placeholder="用户名">
 						</div>
 						<div class="form-group">
-							<label>Password</label> <input type="password"
-								class="form-control" placeholder="Password">
+							<label>密码</label> <input type="password" name="password"
+								class="form-control" placeholder="密码">
 						</div>
 						<div class="checkbox">
-							<label> <input type="checkbox"> Remember Me
-							</label> <label class="pull-right"> <a href="#">Forgotten
-									Password?</a>
+							<label> <input type="checkbox"> 记住密码
+							</label> <label class="pull-right"> <a href="#">忘记密码?</a>
 							</label>
 
 						</div>
-						<button type="submit"
-							class="btn btn-success btn-flat m-b-30 m-t-30">Sign in</button>
-						<div class="social-login-content">
-							<div class="social-button">
-								<button type="button"
-									class="btn social facebook btn-flat btn-addon mb-3">
-									<i class="ti-facebook"></i>Sign in with facebook
-								</button>
-								<button type="button"
-									class="btn social twitter btn-flat btn-addon mt-2">
-									<i class="ti-twitter"></i>Sign in with twitter
-								</button>
-							</div>
-						</div>
+						<input type="submit"
+							class="btn btn-success btn-flat m-b-30 m-t-30" value="登录" />
 						<div class="register-link m-t-15 text-center">
 							<p>
 								Don't have account ? <a href="#"> Sign Up Here</a>
 							</p>
 						</div>
 					</form>
+					
 				</div>
 			</div>
 		</div>

@@ -19,7 +19,7 @@
 		<result column="remark" jdbcType="VARCHAR" property="remark" />
 		<result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
 		<result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
-		<result column="birthday" jdbcType="TIMESTAMP" property="birthday" />
+		<!-- <result column="birthday" jdbcType="TIMESTAMP" property="birthday" /> -->
 		<result column="position" jdbcType="VARCHAR" property="position" />
 		<result column="address" jdbcType="VARCHAR" property="address" />
 	</resultMap>

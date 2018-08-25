@@ -4,6 +4,8 @@ import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 public class NewsInfo {
     /**
      * 主键ID
@@ -49,10 +51,12 @@ public class NewsInfo {
      * 备注
      */
     private String remark;
-
+    
     /**
      * 创建时间
      */
+
+    @JSONField(format = "yyyy-MM-dd hh:mm:ss")
     private Date createDate;
 
     /**
