@@ -1,5 +1,7 @@
 package com.yhz.com.dao;
 
+import java.util.List;
+
 import com.yhz.com.model.Dictionary;
 
 public interface DictionaryMapper {
@@ -14,4 +16,6 @@ public interface DictionaryMapper {
     int updateByPrimaryKeySelective(Dictionary record);
 
     int updateByPrimaryKey(Dictionary record);
+    
+    List<String> select();
 }

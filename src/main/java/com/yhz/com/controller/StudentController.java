@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yhz.com.core.PageInfo;
 import com.yhz.com.dao.StudentMapper;
-import com.yhz.com.model.NewsInfo;
 import com.yhz.com.model.Student;
 
 @Controller
@@ -24,6 +23,7 @@ public class StudentController {
 	
 	@Resource
 	private StudentMapper studentMapper;
+	
 	
 	@RequestMapping("student-list")
 	public String articles() {

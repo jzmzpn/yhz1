@@ -52,7 +52,7 @@ public class NewsInfo {
      * 备注
      */
     private String remark;
-
+    
     /**
      * 创建时间
      */

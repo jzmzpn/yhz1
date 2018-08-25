@@ -32,7 +32,7 @@ public class SessionInterceptor implements HandlerInterceptor {
         if(session.getAttribute(ProjectConstant.SESSION_KEY) != null) {
         	return true;
         }
-        response.sendRedirect("login");
+        response.sendRedirect("/yhz/login");
         return false;
     }
 

@@ -68,4 +68,10 @@
       value = #{value,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+  <select id="select" resultType="java.lang.String" >
+    select 
+	value
+    from dictionary_info
+  </select>
 </mapper>
