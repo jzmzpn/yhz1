@@ -5,9 +5,10 @@
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="code" property="code" jdbcType="INTEGER" />
     <result column="value" property="value" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, code, value
+    id, code, value,remark
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -20,9 +21,9 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.yhz.com.model.Dictionary" >
-    insert into dictionary_info (id, code, value
+    insert into dictionary_info (id, code, value,remark
       )
-    values (#{id,jdbcType=INTEGER}, #{code,jdbcType=INTEGER}, #{value,jdbcType=VARCHAR}
+    values (#{id,jdbcType=INTEGER}, #{code,jdbcType=INTEGER}, #{value,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.yhz.com.model.Dictionary" >
@@ -37,6 +38,9 @@
       <if test="value != null" >
         value,
       </if>
+       <if test="remark != null" >
+        remark,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -47,6 +51,9 @@
       </if>
       <if test="value != null" >
         #{value,jdbcType=VARCHAR},
+      </if>
+       <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -59,13 +66,41 @@
       <if test="value != null" >
         value = #{value,jdbcType=VARCHAR},
       </if>
+      <if test="remark != null" >
+        remark =  #{remark,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.yhz.com.model.Dictionary" >
     update dictionary_info
     set code = #{code,jdbcType=INTEGER},
-      value = #{value,jdbcType=VARCHAR}
+      value = #{value,jdbcType=VARCHAR},
+       remark = #{remark,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+  <select id="getDictionarySize" resultType="int">
+		select count(1) from dictionary_info where  code between 500 and 599
+		<if test="name != null and name != ''">
+			and value = #{name}
+		</if>
+	</select>
+
+	<select id="getDictionarys" resultMap="BaseResultMap">
+		select * from dictionary_info where code between 500 and 599
+		<if test="name != null and name != ''">
+			and value = #{name}
+		</if>
+		
+		order by code
+		
+		limit #{start},#{rows}
+	</select>
+	
+	<select id="getMaxCode"  resultType="int">
+		select max(code)+1 from dictionary_info where code between 500 and 599
+	</select>
+	
+	
 </mapper>

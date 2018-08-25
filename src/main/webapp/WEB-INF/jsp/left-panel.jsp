@@ -96,6 +96,17 @@
 						href="forms-advanced.html">Advanced Form</a></li>
 				</ul></li>
 
+		<li class="menu-item-has-children dropdown"><a href="#"
+				class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+				aria-expanded="false"> <i class="menu-icon fa fa-th"></i>缴费款项管理
+			</a>
+				<ul class="sub-menu children dropdown-menu">
+					<li><i class="menu-icon fa fa-th"></i><a
+						href="${pageContext.request.contextPath}/dictionary/dictionary-list">缴费款项管理</a></li>
+					<li><i class="menu-icon fa fa-th"></i><a
+						href="forms-advanced.html">Advanced Form</a></li>
+				</ul></li>
+
 			<h3 class="menu-title">Icons</h3>
 			<!-- /.menu-title -->
 

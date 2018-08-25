@@ -6,6 +6,8 @@ public class Dictionary {
     private Integer code;
 
     private String value;
+    
+    private String remark;
 
     public Integer getId() {
         return id;
@@ -30,4 +32,13 @@ public class Dictionary {
     public void setValue(String value) {
         this.value = value == null ? null : value.trim();
     }
+
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark == null ? null : remark.trim();
+	}
+    
 }

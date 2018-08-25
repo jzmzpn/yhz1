@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yhz.com.dao.MedicalMapper" >
+  <resultMap id="BaseResultMap" type="com.yhz.com.model.Medical" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="medical_name" property="medicalName" jdbcType="VARCHAR" />
+    <result column="use_time" property="useTime" jdbcType="VARCHAR" />
+    <result column="detail" property="detail" jdbcType="VARCHAR" />
+    <result column="medical_image" property="medicalImage" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, medical_name, use_time, detail, medical_image, remark, create_date, update_date
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from medical_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from medical_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.yhz.com.model.Medical" >
+    insert into medical_info (id, medical_name, use_time, 
+      detail, medical_image, remark, 
+      create_date, update_date)
+    values (#{id,jdbcType=INTEGER}, #{medicalName,jdbcType=VARCHAR}, #{useTime,jdbcType=VARCHAR}, 
+      #{detail,jdbcType=VARCHAR}, #{medicalImage,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yhz.com.model.Medical" >
+    insert into medical_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="medicalName != null" >
+        medical_name,
+      </if>
+      <if test="useTime != null" >
+        use_time,
+      </if>
+      <if test="detail != null" >
+        detail,
+      </if>
+      <if test="medicalImage != null" >
+        medical_image,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="medicalName != null" >
+        #{medicalName,jdbcType=VARCHAR},
+      </if>
+      <if test="useTime != null" >
+        #{useTime,jdbcType=VARCHAR},
+      </if>
+      <if test="detail != null" >
+        #{detail,jdbcType=VARCHAR},
+      </if>
+      <if test="medicalImage != null" >
+        #{medicalImage,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yhz.com.model.Medical" >
+    update medical_info
+    <set >
+      <if test="medicalName != null" >
+        medical_name = #{medicalName,jdbcType=VARCHAR},
+      </if>
+      <if test="useTime != null" >
+        use_time = #{useTime,jdbcType=VARCHAR},
+      </if>
+      <if test="detail != null" >
+        detail = #{detail,jdbcType=VARCHAR},
+      </if>
+      <if test="medicalImage != null" >
+        medical_image = #{medicalImage,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yhz.com.model.Medical" >
+    update medical_info
+    set medical_name = #{medicalName,jdbcType=VARCHAR},
+      use_time = #{useTime,jdbcType=VARCHAR},
+      detail = #{detail,jdbcType=VARCHAR},
+      medical_image = #{medicalImage,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  
+  <select id="getMedicalByIds" resultMap="BaseResultMap">
+  	select 
+    <include refid="Base_Column_List" />
+    from medical_info
+    where id in (${ids})
+  </select>
+</mapper>
