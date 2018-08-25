@@ -195,26 +195,12 @@
                 title: '资讯信息',
             },
             {
-                field: 'newsType',
-                title: '资讯类别',
-                formatter: function (value) {
-                	if(value=="301") {
-                		return "<span class='badge badge-success'  style='padding:5px 10px;'>院所新闻</span>";
-                	} else if(value == "302") {
-                		return "<span class='badge badge-info'  style='padding:5px 10px;'>保健知识</span>";
-                	} else if(value == "303") {
-                		return "<span class='badge badge-warning'  style='padding:5px 10px;'>育儿分享</span>";
-                	}
-                	return value;
-                    	
-                }
+                field: 'birthday',
+                title: '生日'
             },
             {
                 field: 'createDate',
-                title: '创建时间',
-                formatter: function (value, row, index) {
-                    return changeDateFormat(value)
-                }
+                title: '创建时间'
             },],
             onLoadSuccess: function () {
             },

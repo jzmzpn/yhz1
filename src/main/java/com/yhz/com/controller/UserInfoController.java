@@ -57,4 +57,5 @@ public class UserInfoController {
 		map.put("userInfo", info);
         return map;
     }
+    
 }

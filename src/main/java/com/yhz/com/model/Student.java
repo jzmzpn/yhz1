@@ -2,6 +2,8 @@ package com.yhz.com.model;
 
 import java.util.Date;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 public class Student {
     private Integer id;
 
@@ -19,6 +21,7 @@ public class Student {
 
     private String address;
 
+    @JSONField(format = "yyyy-MM-dd hh:mm:ss")
     private Date enterDate;
 
     private Date outDate;
@@ -27,6 +30,7 @@ public class Student {
 
     private String remark;
 
+    @JSONField(format = "yyyy-MM-dd hh:mm:ss")
     private Date createDate;
 
     private Date updateDate;
@@ -142,4 +146,14 @@ public class Student {
     public void setUpdateDate(Date updateDate) {
         this.updateDate = updateDate;
     }
+
+	@Override
+	public String toString() {
+		return "Student [id=" + id + ", name=" + name + ", sid=" + sid + ", sex=" + sex + ", birthday=" + birthday
+				+ ", imageId=" + imageId + ", classId=" + classId + ", address=" + address + ", enterDate=" + enterDate
+				+ ", outDate=" + outDate + ", guardianNum=" + guardianNum + ", remark=" + remark + ", createDate="
+				+ createDate + ", updateDate=" + updateDate + "]";
+	}
+    
+    
 }
