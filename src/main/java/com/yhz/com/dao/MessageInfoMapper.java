@@ -22,4 +22,7 @@ public interface MessageInfoMapper {
     int getSize(@Param("receiveUid") Integer receiveUid);
     
     List<MessageInfo> getMessages(@Param("receiveUid") Integer receiveUid, @Param("start") Integer start, @Param("rows") Integer rows);
+    
+    
+    List<MessageInfo> getMessageBySelective(MessageInfo messageInfo);
 }

@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.yhz.com.core.PageInfo;
 import com.yhz.com.dao.MessageInfoMapper;
 import com.yhz.com.model.MessageInfo;
@@ -52,5 +54,12 @@ public class MessageController {
     	Map<String, Object> map = new HashMap<String, Object>();
 		map.put("messageInfo", info);
         return map;
+    }
+    
+    @RequestMapping(value = "testmessage", method=RequestMethod.GET)
+    public void getMessageListWithPage(Integer pageNum, Integer pageSize) {
+    	Page<MessageInfo> page = PageHelper.startPage(pageNum, pageSize, true);
+    	List<MessageInfo> selective = messageInfoMapper.getMessageBySelective(null);
+    	System.out.println(page.getTotal());
     }
 }
