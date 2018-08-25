@@ -19,7 +19,6 @@ public class KAdminServiceImpl implements KAdminService {
     @Resource
     private KAdminMapper kAdminMapper;
 
-	@Override
 	public KAdmin getUserByName(String userName) {
 		// TODO Auto-generated method stub
 		return kAdminMapper.getUserByName(userName);

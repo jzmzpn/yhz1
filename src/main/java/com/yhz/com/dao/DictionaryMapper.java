@@ -2,8 +2,11 @@ package com.yhz.com.dao;
 
 import java.util.List;
 
+<<<<<<< HEAD
 import org.apache.ibatis.annotations.Param;
 
+=======
+>>>>>>> branch 'master' of https://github.com/jzmzpn/yhz.git
 import com.yhz.com.model.Dictionary;
 
 public interface DictionaryMapper {
@@ -29,4 +32,6 @@ public interface DictionaryMapper {
 	 */
 	Integer getMaxCode();
 
+    
+    List<String> select();
 }

@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,10 +25,34 @@ public class UserInfoServiceImpl implements UserInfoService {
     	return userInfoMapper.getUsers(name, start, rows);
     }
 
-	@Override
 	public int getUsersSize(String name) {
 		// TODO Auto-generated method stub
 		return userInfoMapper.getUsersSize(name);
 	}
+
+	@Override
+	public int insert(UserInfo userIofo) {
+		return userInfoMapper.insert(userIofo);
+	}
+
+	@Override
+	public int updateByPrimaryKey(UserInfo userIofo) {
+
+		return userInfoMapper.updateByPrimaryKey(userIofo);
+	}
+
+	@Override
+	public int deleteByPrimaryKey(Integer id) {
+		
+		return userInfoMapper.deleteByPrimaryKey(id);
+	}
+
+	@Override
+	public List<UserInfo> getGuardianInfo(Integer studentId) {
+		
+		return userInfoMapper.getGuardianInfo(studentId);
+	}
+	
+	
 
 }

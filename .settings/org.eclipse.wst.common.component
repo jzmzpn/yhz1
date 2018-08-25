@@ -2,7 +2,12 @@
     <wb-module deploy-name="spring-boot-study">
         <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
+<<<<<<< HEAD
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/"/>
+=======
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
+>>>>>>> branch 'master' of https://github.com/jzmzpn/yhz.git
         <property name="context-root" value="yhz"/>
         <property name="java-output-path" value="/spring-boot-study/target/classes"/>
     </wb-module>

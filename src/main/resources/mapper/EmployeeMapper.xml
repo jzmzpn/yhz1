@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yhz.com.dao.EmployeeMapper" >
+  <resultMap id="BaseResultMap" type="com.yhz.com.model.Employee" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="VARCHAR" />
+    <result column="birthday" property="birthday" jdbcType="VARCHAR" />
+    <result column="position" property="position" jdbcType="VARCHAR" />
+    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+    <result column="education" property="education" jdbcType="VARCHAR" />
+    <result column="image_id" property="imageId" jdbcType="INTEGER" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+	<result column="is_delete" property="isdelete" jdbcType="BIT" />
+	  <result column="kindergarten_id" property="kindergartenId" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, name,  sex, birthday, image_id, position, address, mobile,education,is_delete,kindergarten_id,
+    create_date, update_date
+  </sql>
+  <insert id="insertEmployee" parameterType="com.yhz.com.model.Employee">
+  
+  insert into employee_info( id, name,  sex, birthday, image_id, position, address, mobile,education,is_delete,kindergarten_id,
+    create_date, update_date) 
+   values(#{id,jdbcType=INTEGER},#{name,jdbcType=VARCHAR},#{sex,jdbcType=VARCHAR},#{birthday,jdbcType=VARCHAR},#{imageId,jdbcType=INTEGER},#{position,jdbcType=VARCHAR},
+   #{address,jdbcType=VARCHAR},#{mobile,jdbcType=VARCHAR},#{education,jdbcType=VARCHAR},#{isdelete,jdbcType=BIT},#{kindergartenId,jdbcType=INTEGER},
+   #{createDate,jdbcType=TIMESTAMP},#{updateDate,jdbcType=TIMESTAMP});
+  
+  </insert>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    update  employee_info set is_delete=1
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  
+   <select id="getSize" resultType="int">
+		select count(1) from employee_info where 1 = 1 and is_delete=0
+		<if test="kindergartenId != null and kindergartenId != ''">
+			and kindergarten_id = #{kindergartenId}
+		</if>
+	</select>
+	
+	<select id="getEmployees" resultMap="BaseResultMap">
+		select * from employee_info where 1 = 1 and is_delete=0
+		<if test="kindergartenId != null and kindergartenId != ''">
+			and kindergarten_id = #{kindergartenId}
+		</if>
+		
+		order by create_date desc
+		
+		limit #{start},#{rows}
+	</select>
+	
+	<select id="getEmployee" resultMap="BaseResultMap">
+		select * from employee_info where 1 = 1 
+		<if test="id != null and id != ''">
+			and id = #{id}
+		</if>
+	</select>
+	
+	<select id="getAllEmployee" resultMap="BaseResultMap">
+		select * from employee_info where 1 = 1 
+	</select>
+	
+</mapper>

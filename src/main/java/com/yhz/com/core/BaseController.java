@@ -16,7 +16,7 @@ public abstract class BaseController {
 //    
 //    protected List<RbacRolePrivilege> rbacRolePrivileges = null;
 
-	protected static final Map<String, List<Integer>> MAP = new HashMap<>();
+	protected static final Map<String, List<Integer>> MAP = new HashMap<String, List<Integer>>();
 
 	protected Result success(Object objs) {
 		return ResultGenerator.genSuccessResult(objs);

@@ -14,4 +14,12 @@ public interface UserInfoMapper {
 	
 	UserInfo selectByPrimaryKey(Integer id);
 	
+	int insert(UserInfo record);
+	
+	int updateByPrimaryKey(UserInfo record);
+	
+	int deleteByPrimaryKey(Integer id);
+	
+    List<UserInfo> getGuardianInfo(@Param("studentId") Integer studentId);
+    
 }

@@ -1,5 +1,10 @@
 package com.yhz.com.dao;
 
+import java.util.Date;
+import java.util.Map;
+
+import org.apache.ibatis.annotations.Param;
+
 import com.yhz.com.model.Attendance;
 
 public interface AttendanceMapper {
@@ -14,4 +19,8 @@ public interface AttendanceMapper {
     int updateByPrimaryKeySelective(Attendance record);
 
     int updateByPrimaryKey(Attendance record);
+    
+    int countByDate(@Param("classId")Integer classId, @Param("date") String date, @Param("status") Boolean status);
+    
+    Map<String, Object> classDetail(@Param("classId")Integer classId, @Param("date") String date);
 }

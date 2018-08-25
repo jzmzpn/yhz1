@@ -1,7 +1,6 @@
 package com.yhz.com.service;
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
 
 import com.yhz.com.model.UserInfo;
 
@@ -15,4 +14,12 @@ public interface UserInfoService {
 	
 	List<UserInfo> getUsers(String name, Integer start, Integer rows);
 
+	int insert(UserInfo userIofo);
+	
+	int updateByPrimaryKey(UserInfo userIofo);
+	
+	int deleteByPrimaryKey(Integer id);
+	
+	List<UserInfo> getGuardianInfo(Integer studentId);
+	
 }
