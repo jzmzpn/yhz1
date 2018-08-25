@@ -1,7 +1,6 @@
 package com.yhz.com.model;
 
 import java.util.Date;
-import javax.persistence.*;
 
 public class UserInfo {
     /**
