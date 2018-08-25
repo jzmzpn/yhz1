@@ -103,7 +103,7 @@ public class FileUploadController {
 	@RequestMapping(value="xls/upload/stu", method=RequestMethod.POST)
 	@ResponseBody
 	public Integer uploadXls(HttpServletRequest request) {
-		List<ExcelHead> heads = new ArrayList<>();
+		List<ExcelHead> heads = new ArrayList<ExcelHead>();
 		ExcelHead head = new ExcelHead();
 		head.setExcelName("学号");
 		head.setEntityName("sid");
@@ -189,14 +189,14 @@ public class FileUploadController {
 	                       in = file.getInputStream(); 
 	                       //上传
 	                       List<Student> list = ExcelUtils.readExcelToEntity(Student.class, in, path, heads);
-	     	 	           list.forEach(stu -> {
-	     	 	        	  if(!StringUtils.isEmpty(stu.getName())) {
-	     	 	        		  if(StringUtils.isEmpty(stu.getSex())) {
-	     	 	        			  stu.setSex("S");
-	     	 	        		  }
-	     	 	        		studentMapper.insertSelective(stu);
-	     	 	        	  }
-	     	 	           });
+//	     	 	           list.forEach(stu -> {
+//	     	 	        	  if(!StringUtils.isEmpty(stu.getName())) {
+//	     	 	        		  if(StringUtils.isEmpty(stu.getSex())) {
+//	     	 	        			  stu.setSex("S");
+//	     	 	        		  }
+//	     	 	        		studentMapper.insertSelective(stu);
+//	     	 	        	  }
+//	     	 	           });
 	                       return list.size();
 	                       
 	                   }

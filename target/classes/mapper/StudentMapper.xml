@@ -4,6 +4,7 @@
   <resultMap id="BaseResultMap" type="com.yhz.com.model.Student" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="little_name" property="littleName" jdbcType="VARCHAR" />
     <result column="sid" property="sid" jdbcType="VARCHAR" />
     <result column="sex" property="sex" jdbcType="VARCHAR" />
     <result column="birthday" property="birthday" jdbcType="VARCHAR" />
@@ -16,12 +17,12 @@
     <result column="remark" property="remark" jdbcType="VARCHAR" />
     <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
     <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="is_delete" property="isDelete" jdbcType="BIT" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, name, sid, sex, birthday, image_id, class_id, address, enter_date, out_date, 
-    guardian_num, remark, create_date, update_date
+    id, name, little_name, sid, sex, birthday, image_id, class_id, address, enter_date, 
+    out_date, guardian_num, remark, create_date, update_date, is_delete
   </sql>
-  
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
@@ -33,16 +34,18 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.yhz.com.model.Student" >
-    insert into student_info (id, name, sid, 
-      sex, birthday, image_id, 
-      class_id, address, enter_date, 
-      out_date, guardian_num, remark, 
-      create_date, update_date)
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{sid,jdbcType=VARCHAR}, 
-      #{sex,jdbcType=VARCHAR}, #{birthday,jdbcType=VARCHAR}, #{imageId,jdbcType=INTEGER}, 
-      #{classId,jdbcType=INTEGER}, #{address,jdbcType=VARCHAR}, #{enterDate,jdbcType=TIMESTAMP}, 
-      #{outDate,jdbcType=TIMESTAMP}, #{guardianNum,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, 
-      #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP})
+    insert into student_info (id, name, little_name, 
+      sid, sex, birthday, 
+      image_id, class_id, address, 
+      enter_date, out_date, guardian_num, 
+      remark, create_date, update_date, 
+      is_delete)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{littleName,jdbcType=VARCHAR}, 
+      #{sid,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{birthday,jdbcType=VARCHAR}, 
+      #{imageId,jdbcType=INTEGER}, #{classId,jdbcType=INTEGER}, #{address,jdbcType=VARCHAR}, 
+      #{enterDate,jdbcType=TIMESTAMP}, #{outDate,jdbcType=TIMESTAMP}, #{guardianNum,jdbcType=INTEGER}, 
+      #{remark,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}, 
+      #{isDelete,jdbcType=BIT})
   </insert>
   <insert id="insertSelective" parameterType="com.yhz.com.model.Student" >
     insert into student_info
@@ -52,6 +55,9 @@
       </if>
       <if test="name != null" >
         name,
+      </if>
+      <if test="littleName != null" >
+        little_name,
       </if>
       <if test="sid != null" >
         sid,
@@ -89,6 +95,9 @@
       <if test="updateDate != null" >
         update_date,
       </if>
+      <if test="isDelete != null" >
+        is_delete,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -96,6 +105,9 @@
       </if>
       <if test="name != null" >
         #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="littleName != null" >
+        #{littleName,jdbcType=VARCHAR},
       </if>
       <if test="sid != null" >
         #{sid,jdbcType=VARCHAR},
@@ -133,6 +145,9 @@
       <if test="updateDate != null" >
         #{updateDate,jdbcType=TIMESTAMP},
       </if>
+      <if test="isDelete != null" >
+        #{isDelete,jdbcType=BIT},
+      </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.yhz.com.model.Student" >
@@ -140,6 +155,9 @@
     <set >
       <if test="name != null" >
         name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="littleName != null" >
+        little_name = #{littleName,jdbcType=VARCHAR},
       </if>
       <if test="sid != null" >
         sid = #{sid,jdbcType=VARCHAR},
@@ -177,12 +195,16 @@
       <if test="updateDate != null" >
         update_date = #{updateDate,jdbcType=TIMESTAMP},
       </if>
+      <if test="isDelete != null" >
+        is_delete = #{isDelete,jdbcType=BIT},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.yhz.com.model.Student" >
     update student_info
     set name = #{name,jdbcType=VARCHAR},
+      little_name = #{littleName,jdbcType=VARCHAR},
       sid = #{sid,jdbcType=VARCHAR},
       sex = #{sex,jdbcType=VARCHAR},
       birthday = #{birthday,jdbcType=VARCHAR},
@@ -194,9 +216,11 @@
       guardian_num = #{guardianNum,jdbcType=INTEGER},
       remark = #{remark,jdbcType=VARCHAR},
       create_date = #{createDate,jdbcType=TIMESTAMP},
-      update_date = #{updateDate,jdbcType=TIMESTAMP}
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      is_delete = #{isDelete,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
   <select id="getMaleNum" resultType="int">
 		select count(1) from student_info where 1 = 1
 			and sex = "M"
@@ -222,4 +246,17 @@
 		
 		limit #{start},#{rows}
 	</select>
+	
+	<select id="selectByClassOrTeacher" resultType="java.util.Map" >
+    select 
+		stu.id, stu.name, im.image_path as image
+    from student_info stu left join image_info im on stu.image_id = im.id
+	where 1=1
+    	<if test="classId != null">
+    	 and stu.class_id = #{classId,jdbcType=INTEGER} 
+    	</if>
+    	
+  </select>
+	
+	
 </mapper>

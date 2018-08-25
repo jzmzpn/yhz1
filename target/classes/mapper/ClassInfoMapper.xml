@@ -139,4 +139,35 @@
       update_date = #{updateDate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+  <select id="selectClassByDate" resultType="java.util.Map">
+    select 
+    c.id, c.class_name as name, null as image
+    from class_info c
+    where kindergarten_id = #{kid,jdbcType=INTEGER}
+    and DATE_FORMAT(create_date,'%Y-%m') = #{date}
+  </select>
+  
+  
+  <select id="selectByClassOrTeacher" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from class_info
+	where 1=1
+    	<if test="classId != null">
+    	 or id = #{classId,jdbcType=INTEGER} 
+    	</if>
+    	<if test="teacherId != null">
+    	or teacher_id = #{teacherId}
+    	</if>
+  </select>
+  
+  
+  <select id="selectByTeacherId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from class_info
+    where teacher_id = #{id,jdbcType=INTEGER}
+  </select>
+    
 </mapper>

@@ -26,7 +26,6 @@ public class UserInfoServiceImpl implements UserInfoService {
     	return userInfoMapper.getUsers(name, start, rows);
     }
 
-	@Override
 	public int getUsersSize(String name) {
 		// TODO Auto-generated method stub
 		return userInfoMapper.getUsersSize(name);

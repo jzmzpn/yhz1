@@ -18,13 +18,12 @@ public class SessionInterceptor implements HandlerInterceptor {
 	@Autowired
 	private HttpSession session;
 	
-	private static Set<String> whiteUrl = new HashSet<>();
+	private static Set<String> whiteUrl = new HashSet<String>();
 	
 	static {
 		whiteUrl.add("/yhz/login");
 	}
 	
-    @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object o) throws Exception {
         if(whiteUrl.contains(request.getRequestURI())) {
         	return true;
@@ -36,11 +35,9 @@ public class SessionInterceptor implements HandlerInterceptor {
         return false;
     }
 
-    @Override
     public void postHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, ModelAndView modelAndView) throws Exception {
     }
 
-    @Override
     public void afterCompletion(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, Exception e) throws Exception {
     }
 }
