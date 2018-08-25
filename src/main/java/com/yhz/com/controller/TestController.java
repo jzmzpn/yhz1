@@ -28,7 +28,7 @@ public class TestController {
 	
 	
 	public Map<String, Object> userjson() {
-		List<Map<String, String>> list = new ArrayList<>();
+		List<Map<String, String>> list = new ArrayList<Map<String, String>>();
 		for (int i = 0; i < 10; i++) {
 			Map<String, String> map = new HashMap<String, String>();
 			map.put("id", i + "");

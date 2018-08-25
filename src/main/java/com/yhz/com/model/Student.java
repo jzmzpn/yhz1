@@ -9,6 +9,8 @@ public class Student {
 
     private String name;
 
+    private String littleName;
+
     private String sid;
 
     private String sex;
@@ -24,16 +26,18 @@ public class Student {
     @JSONField(format = "yyyy-MM-dd hh:mm:ss")
     private Date enterDate;
 
+    @JSONField(format = "yyyy-MM-dd hh:mm:ss")
     private Date outDate;
 
     private Integer guardianNum;
 
     private String remark;
-
     @JSONField(format = "yyyy-MM-dd hh:mm:ss")
     private Date createDate;
-
+    @JSONField(format = "yyyy-MM-dd hh:mm:ss")
     private Date updateDate;
+
+    private Boolean isDelete;
 
     public Integer getId() {
         return id;
@@ -49,6 +53,14 @@ public class Student {
 
     public void setName(String name) {
         this.name = name == null ? null : name.trim();
+    }
+
+    public String getLittleName() {
+        return littleName;
+    }
+
+    public void setLittleName(String littleName) {
+        this.littleName = littleName == null ? null : littleName.trim();
     }
 
     public String getSid() {
@@ -147,13 +159,11 @@ public class Student {
         this.updateDate = updateDate;
     }
 
-	@Override
-	public String toString() {
-		return "Student [id=" + id + ", name=" + name + ", sid=" + sid + ", sex=" + sex + ", birthday=" + birthday
-				+ ", imageId=" + imageId + ", classId=" + classId + ", address=" + address + ", enterDate=" + enterDate
-				+ ", outDate=" + outDate + ", guardianNum=" + guardianNum + ", remark=" + remark + ", createDate="
-				+ createDate + ", updateDate=" + updateDate + "]";
-	}
-    
-    
+    public Boolean getIsDelete() {
+        return isDelete;
+    }
+
+    public void setIsDelete(Boolean isDelete) {
+        this.isDelete = isDelete;
+    }
 }

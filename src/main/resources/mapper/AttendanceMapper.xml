@@ -139,4 +139,20 @@
       status = #{status,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+  <select id="countByDate" resultType="java.lang.Integer">
+  	select count(*) from attendance_info where class_id = #{classId} 
+  	AND  
+  	DATE_FORMAT(a.attendance_time,'%Y-%m-%d')= #{date}
+  	and status = #{status}
+  </select>
+  
+  <select id="classDetail" resultType="java.util.Map">
+  	select stu.name, a.status from student_info stu, attendance_info a, image_info im
+  	where stu.id = a.student_id and a.class_id = #{classId} and 
+  	AND  
+  	DATE_FORMAT(a.attendance_time,'%Y-%m-%d')= #{date}
+
+  	and stu.image_id = im.id
+  </select>
 </mapper>

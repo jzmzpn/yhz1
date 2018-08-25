@@ -29,7 +29,6 @@ public class NewsInfoServiceImpl implements NewsInfoService {
     	return newsInfoMapper.getNews(newsType, start, rows);
     }
 
-	@Override
 	public int getNewsSize(Integer newsType) {
 		// TODO Auto-generated method stub
 		return newsInfoMapper.getNewsSize(newsType);

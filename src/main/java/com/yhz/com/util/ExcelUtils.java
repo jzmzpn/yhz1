@@ -287,7 +287,7 @@ public class ExcelUtils {
     	try {
 			FileInputStream in = new FileInputStream(file);
 			try {
-				List<ExcelHead> heads = new ArrayList<>();
+				List<ExcelHead> heads = new ArrayList<ExcelHead>();
 				ExcelHead head = new ExcelHead();
 				head.setExcelName("学号");
 				head.setEntityName("sid");
