@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yhz.com.dao.StudentMapper;
 import com.yhz.com.model.Student;
+import com.yhz.com.model.UserInfo;
 
 @Controller
 @RequestMapping("student")
@@ -33,5 +34,15 @@ public class StudentController {
 		map.put("listData", info);
 		return map;
 	}
+	
+	@RequestMapping(value="studentDetail/{Id}", method=RequestMethod.GET)
+	@ResponseBody
+    public Map<String, Object> query1(@PathVariable("Id")Integer id) {
+		
+		List<Student> info = studentMapper.studentDetail(id);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("studentMapper", info);
+        return map;
+    }
 	
 }

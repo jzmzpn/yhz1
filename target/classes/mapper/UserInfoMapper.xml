@@ -30,6 +30,248 @@
 			and name = #{name}
 		</if>
 	</select>
+	
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    	update from user_info
+ 		  <if test="studentId != null" >
+	        student_id = null ,
+	      </if>
+    	where id = #{id,jdbcType=INTEGER}
+  	</delete>
+
+ 	<insert id="insert" parameterType="com.yhz.com.model.UserInfo" >
+    	insert into user_info (id, openid, role_code, name,
+		job_number, sex, age, mobile, telephone, identity_card, 
+		education, birthday, position, address, student_id,
+		relationship, is_register, remark, create_date, update_date)
+    values (#{id,jdbcType=INTEGER}, #{openid,jdbcType=INTEGER},
+     #{role_code,jdbcType=INTEGER},   #{name,jdbcType=VARCHAR},
+      #{job_number,jdbcType=VARCHAR}, #{sex,jdbcType=INTEGER}, 
+      #{age,jdbcType=INTEGER}, #{mobile,jdbcType=VARCHAR},
+       #{telephone,jdbcType=VARCHAR}, #{identity_card,jdbcType=VARCHAR},
+        #{education,jdbcType=VARCHAR}, #{birthday,jdbcType=VARCHAR}, 
+      #{position,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{student_id,jdbcType=INTEGER},
+       #{relationship,jdbcType=VARCHAR}, #{is_register,jdbcType=BIT}, #{remark,jdbcType=VARCHAR},
+        #{create_date,jdbcType=TIMESTAMP}, #{update_date,jdbcType=TIMESTAMP})
+	  </insert>
+	  
+	  <insert id="insertSelective" parameterType="com.yhz.com.model.UserInfo" >
+	    insert into user_info
+	    <trim prefix="(" suffix=")" suffixOverrides="," >
+	      <if test="id != null" >
+	        id,
+	      </if>
+	      <if test="openid != null" >
+	        openid,
+	      </if>
+	      <if test="roleCode != null" >
+	        role_code,
+	      </if>
+	      <if test="name != null" >
+	        name,
+	      </if>
+	      <if test="jobNumber != null" >
+	        job_number,
+	      </if>
+	      <if test="sex != null" >
+	        sex,
+	      </if>
+	      <if test="age != null" >
+	        age,
+	      </if>
+	      <if test="mobile != null" >
+	        mobile,
+	      </if>
+	      <if test="telephone != null" >
+	        telephone,
+	      </if>
+	      <if test="identityCard != null" >
+	        identity_card, 
+	      </if>
+	      <if test="education != null" >
+	        education,
+	      </if>
+	      <if test="remark != null" >
+	        remark,
+	      </if>
+	      <if test="birthday != null" >
+	        birthday,
+	      </if>
+	      <if test="position != null" >
+	        position,
+	      </if>
+	      <if test="address != null" >
+	        address,
+	      </if>
+	      <if test="studentId != null" >
+	        student_id,
+	      </if>
+	      <if test="relationship != null" >
+	        relationship,
+	      </if>
+	      <if test="isRegister != null" >
+	        is_register,
+	      </if>
+	      <if test="createDate != null" >
+	        create_date,
+	      </if>
+	      <if test="updateDate != null" >
+	        update_date,
+	      </if>
+	    </trim>
+	    <trim prefix="values (" suffix=")" suffixOverrides="," >
+	      <if test="id != null" >
+	        #{id,jdbcType=INTEGER},
+	      </if>
+	      <if test="openid != null" >
+	        #{openid,jdbcType=INTEGER},
+	      </if>
+	      <if test="roleCode != null" >
+			#{roleCode,jdbcType=INTEGER}, 
+	      </if>
+	      <if test="name != null" >
+	        #{name,jdbcType=VARCHAR},
+	      </if>
+	      <if test="jobNumber != null" >
+	        #{job_number,jdbcType=VARCHAR},
+	      </if>
+	      <if test="sex != null" >
+	        #{sex,jdbcType=INTEGER}, 
+	      </if>
+	      <if test="age != null" >
+	        #{age,jdbcType=INTEGER},
+	      </if>
+	      <if test="mobile != null" >
+	         #{mobile,jdbcType=VARCHAR},
+	      </if>
+	      <if test="telephone != null" >
+	        #{telephone,jdbcType=VARCHAR}, 
+	      </if>
+	      <if test="identityCard != null" >
+	        #{identityCard,jdbcType=VARCHAR},
+	      </if>
+	      <if test="education != null" >
+	        #{education,jdbcType=VARCHAR},
+	      </if>
+	      <if test="birthday != null" >
+	        #{birthday,jdbcType=VARCHAR},
+	      </if>
+	      <if test="position != null" >
+	        #{position,jdbcType=VARCHAR},
+	      </if>
+	      <if test="address != null" >
+	        #{address,jdbcType=VARCHAR},
+	      </if>
+	      <if test="studentId != null" >
+	        #{studentId,jdbcType=INTEGER},
+	      </if>
+	      <if test="relationship != null" >
+	        #{relationship,jdbcType=VARCHAR},
+	      </if>
+	      <if test="isRegister != null" >
+	        #{isRegister,jdbcType=BIT},
+	      </if>
+	      <if test="remark != null" >
+	        #{remark,jdbcType=VARCHAR},
+	      </if>
+	      <if test="createDate != null" >
+	        #{createDate,jdbcType=TIMESTAMP},
+	      </if>
+	      <if test="updateDate != null" >
+	        #{updateDate,jdbcType=TIMESTAMP},
+	      </if>
+	    </trim>
+	  </insert>
+  
+	  <update id="updateByPrimaryKeySelective" parameterType="com.yhz.com.model.UserInfo" >
+	    update user_info
+	    <set >
+	      <if test="openid != null" >
+	       openid = #{openid,jdbcType=INTEGER},
+	      </if>
+	      <if test="roleCode != null" >
+	        role_code = #{roleCode,jdbcType=INTEGER},
+	      </if>
+	      <if test="name != null" >
+	        name = #{name,jdbcType=VARCHAR},
+	      </if>
+	      <if test="jobNumber != null" >
+	        job_number = #{jobNumber,jdbcType=VARCHAR},
+	      </if>
+	      <if test="sex != null" >
+	        sex = #{sex,jdbcType=INTEGER},
+	      </if>
+	      <if test="age != null" >
+	        age = #{age,jdbcType=INTEGER},
+	      </if>
+	      <if test="mobile != null" >
+	        mobile = #{mobile,jdbcType=VARCHAR},
+	      </if>
+	      <if test="telephone != null" >
+	        telephone = #{telephone,jdbcType=VARCHAR}, 
+	      </if>
+	      <if test="identityCard != null" >
+	        identity_card = #{identityCard,jdbcType=VARCHAR},
+	      </if>
+	      <if test="education != null" >
+	        education = #{education,jdbcType=VARCHAR},
+	      </if>
+	      <if test="birthday != null" >
+	        birthday = #{birthday,jdbcType=VARCHAR},
+	      </if>
+	      <if test="position != null" >
+	        position = #{position,jdbcType=VARCHAR},
+	      </if>
+	      <if test="address != null" >
+	        address = #{address,jdbcType=VARCHAR},
+	      </if>
+	      <if test="studentId != null" >
+	        student_id = #{studentId,jdbcType=INTEGER},
+	      </if>
+	      <if test="relationship != null" >
+	        relationship = #{relationship,jdbcType=VARCHAR},
+	      </if>
+	      <if test="isRegister != null" >
+	        is_register = #{isRegister,jdbcType=BIT},
+	      </if>
+	      <if test="remark != null" >
+	        remark = #{remark,jdbcType=VARCHAR},
+	      </if>
+	      <if test="createDate != null" >
+	       create_date = #{createDate,jdbcType=TIMESTAMP},
+	      </if>
+	      <if test="updateDate != null" >
+	        update_date = #{updateDate,jdbcType=TIMESTAMP},
+	      </if>
+	    </set>
+	    where id = #{id,jdbcType=INTEGER}
+	  </update>
+	  <update id="updateByPrimaryKey" parameterType="com.yhz.com.model.UserInfo" >
+	    update user_info
+	      set 
+	      
+	      openid = #{openid,jdbcType=VARCHAR},
+	      role_code = #{roleCode,jdbcType=VARCHAR},
+	      name = #{name,jdbcType=VARCHAR},
+	      job_number = #{jobnNumber,jdbcType=VARCHAR},
+	      sex = #{sex,jdbcType=INTEGER},
+	      age = #{age,jdbcType=INTEGER},
+	      
+	      mobile = #{mobile,jdbcType=TIMESTAMP},
+	      telephone = #{telephone,jdbcType=INTEGER},
+	      identity_card = #{identityCard,jdbcType=VARCHAR},
+	      education = #{education,jdbcType=TIMESTAMP},
+	      birthday = #{birthday,jdbcType=TIMESTAMP},
+	      position = #{position,jdbcType=TIMESTAMP},
+	      address = #{address,jdbcType=TIMESTAMP},
+	      student_id = #{studentId,jdbcType=TIMESTAMP},
+	      relationship = #{relationship,jdbcType=INTEGER},
+	      is_register = #{isRegister,jdbcType=BIT},
+	      remark = #{remark,jdbcType=VARCHAR},
+	      create_date = #{createDate,jdbcType=TIMESTAMP}
+	      update_date = #{updateDate,jdbcType=TIMESTAMP}
+	    where id = #{id,jdbcType=INTEGER}
+	  </update>
 
 	<select id="getUsers" resultMap="BaseResultMap">
 		select * from user_info where 1 = 1
@@ -48,4 +290,11 @@
 	    from user_info
 	    where id = #{id,jdbcType=INTEGER}
   </select>
+  
+  <select id="getGuardianInfo" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+	    SELECT *
+	    FROM user_info 
+	    WHERE student_id =#{studentId,jdbcType=INTEGER}
+  </select>
+  
 </mapper>

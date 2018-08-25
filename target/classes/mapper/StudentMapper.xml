@@ -203,6 +203,12 @@
 		and class_id = #{classId}
 	</select>
 	
+	<select id="studentDetail" resultType="int">
+		SELECT ima.image_path,stu.address,stu.little_name,stu.sex,stu.class_id,stu.birthday,cls.class_name FROM student_info stu 
+		INNER JOIN  image_info ima ON stu.image_id = ima.id
+		INNER JOIN  class_info cls ON stu.class_id=cls.id
+		WHERE  stu.id =  #{id}
+	</select>
 	
 	<select id="selectByClassId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 

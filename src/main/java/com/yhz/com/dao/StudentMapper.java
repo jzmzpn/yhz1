@@ -22,4 +22,6 @@ public interface StudentMapper {
     int getMaleNum(@Param("classId")Integer classId);
     
     List<Student> selectByClassId(@Param("classId") Integer classId);
+    
+    List<Student> studentDetail(@Param("Id") Integer id);
 }
